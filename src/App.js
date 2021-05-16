@@ -1,14 +1,16 @@
 import './App.css';
 import React, {Component} from "react";
+import Layout from "./components/Layout";
+import Users from "./components/users/Users";
 
 class App extends Component {
     render() {
         return (
-            <React.Fragment>
-                <div>
-                    <h1>Hello</h1>
+            <Layout>
+                <div className={"container"}>
+                    <Users/>
                 </div>
-            </React.Fragment>
+            </Layout>
         );
     }
 
