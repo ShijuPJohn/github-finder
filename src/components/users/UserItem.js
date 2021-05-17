@@ -9,7 +9,6 @@ const UserItem = (props) => {
             <div>
                 <a className={"btn btn-dark btn-sm my-1"} href={html_url}>More</a>
             </div>
-
         </div>
     );
 }
