@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 
 class Users extends Component {
     render() {
-        const {loading, users} = this.props
+        const {loading, users, getUser} = this.props
         return (
             <div style={userStyle}>
                 {loading ? <Spinner/> : users.map((user) => (
-                    <UserItem key={user.id} user={user}/>
+                    <UserItem key={user.id} user={user} getUser={getUser}/>
                 ))}
             </div>
         );
@@ -27,6 +27,7 @@ const userStyle = {
 Users.propTypes = {
     users: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
+    getUser: PropTypes.func.isRequired,
 }
 
 export default Users;
