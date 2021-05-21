@@ -3,7 +3,7 @@ import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {useContext} from "react";
-import GithubProvider, {GithubContext} from "../../context/githubContext";
+import  {GithubContext} from "../../context/github/githubContext";
 
 
 const Navbar = (props) => {
@@ -18,10 +18,7 @@ const Navbar = (props) => {
                 <FontAwesomeIcon icon={faGithub}/>
                 <span/> {props.title}
             </h1>
-            <h1>
-                {githubProfiles[0] && githubProfiles[0].title}
-            </h1>
-            <button style={{minWidth: "10px"}} onClick={btnOnClick}> Add</button>
+
             <ul>
                 <li>
                     <Link to={'/'}>
