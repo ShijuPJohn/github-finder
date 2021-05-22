@@ -5,9 +5,9 @@ import {clearUsersAction, searchUsersAction, setLoadingTrue} from "../../context
 import {AlertContext} from "../../context/alert/alertContext";
 import {removeAlert, setAlert} from "../../context/actions/alertActions";
 
-const Search = (props) => {
+const Search = () => {
     const [githubProfiles, dispatchGithub] = useContext(GithubContext)
-    const [alert, dispatchAlert] = useContext(AlertContext)
+    const [, dispatchAlert] = useContext(AlertContext)
 
     const searchUsers = async (str) => {
         dispatchGithub(setLoadingTrue())
@@ -15,7 +15,6 @@ const Search = (props) => {
             + `${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
         dispatchGithub(searchUsersAction(res.data.items))
     }
-    console.log(githubProfiles)
 
     const [text, setText] = useState('')
 

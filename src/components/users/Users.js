@@ -1,13 +1,11 @@
-import React, {Component, useContext} from 'react';
+import React, {useContext} from 'react';
 import UserItem from "./UserItem";
 import Spinner from "../layout/Spinner";
-import PropTypes from "prop-types";
 import {GithubContext} from "../../context/github/githubContext";
 
 const Users = () => {
 
-    const [githubProfiles, dispatchGithub] = useContext(GithubContext)
-    console.log(githubProfiles)
+    const [githubProfiles] = useContext(GithubContext)
     return (
         <div style={userStyle}>
             {githubProfiles.loading ? <Spinner/> : githubProfiles.users.map((user) => (
