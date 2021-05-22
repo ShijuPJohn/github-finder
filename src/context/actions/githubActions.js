@@ -1,4 +1,4 @@
-import {CLEAR_USERS, SEARCH_USERS, SET_LOADING} from "../types";
+import {CLEAR_USERS, GET_USER, SEARCH_USERS, SET_LOADING} from "../types";
 
 export const searchUsersAction = (users) => {
     return {
@@ -14,5 +14,12 @@ export const setLoadingTrue = () => {
 export const clearUsersAction = () => {
     return {
         type: CLEAR_USERS
+    }
+}
+
+export const getUserAction = (user) => {
+    return {
+        type: GET_USER,
+        payload: user
     }
 }

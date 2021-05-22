@@ -1,48 +1,37 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
+import {GithubContext} from "../../context/github/githubContext";
+import {getUserAction} from "../../context/actions/githubActions";
+import axios from "axios";
 
-const User = ({loading, getUser, user, match}) => {
-
+const User = ({match}) => {
+    const [githubProfiles, dispatchGithub] = useContext(GithubContext)
 
     useEffect(() => {
-        getUser(match.params.login)
-        //eslint-disable-next-line
+        async function fetchAPI() {
+            console.log('async fn')
+
+            const res = await axios.get(`https://api.github.com/users/${match.params.login}?client_id=`
+                + `${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+            console.log(res.data)
+            dispatchGithub(getUserAction(res.data))
+        }
+
+        fetchAPI()
     }, [])
+    console.log(githubProfiles.object)
 
-
-    const {
-        // name,
-        // avatar_url,
-        // location,
-        // bio,
-        // blog,
-        // login,
-        // html_url,
-        // followers,
-        // following,
-        // public_repos,
-        // public_gists,
-        hireable,
-    } = user
-    if (loading) {
-        return <Spinner/>
-    }
     return (
         <Fragment>
             <Link to={'/'} className={"btn btn-light"}>Back to Search</Link>
-            Hireable:{' '}
-            {hireable ? <FontAwesomeIcon icon={faCheck}/> : <FontAwesomeIcon icon={faTimesCircle}/>}
+            {githubProfiles.singleUser && githubProfiles.singleUser.login}
         </Fragment>
     );
 
 }
-User.propTypes = {
-    user: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired,
-    getUser: PropTypes.func.isRequired,
-}
+
 export default User;

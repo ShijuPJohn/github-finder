@@ -15,6 +15,7 @@ const Search = (props) => {
             + `${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
         dispatchGithub(searchUsersAction(res.data.items))
     }
+    console.log(githubProfiles)
 
     const [text, setText] = useState('')
 
